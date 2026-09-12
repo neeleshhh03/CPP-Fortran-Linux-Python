@@ -1,0 +1,7 @@
+# Ignore specific Fortran compiled binaries
+fortran/compile
+fortran/myprogram
+fortran/testing
+
+# Ignore standard C++ / C compiled outputs
+a.out
