@@ -1,0 +1,13 @@
+EventID    Latitude    Longitude   Depth_km    Magnitude   EventType   Status        Region
+EVT1001    44.512      -125.104    12.4        4.2         EQ          CONFIRMED     Offshore Oregon
+EVT1002    48.210      -123.450    25.1        2.8         EQ          AUTOMATED     Strait of Juan de Fuca
+EVT1003    46.191      -122.195    2.1         1.9         VOLCANIC    CONFIRMED     Mount St. Helens
+EVT1004    43.782      -127.890    10.0        5.7         EQ          CONFIRMED     Blanco Fracture Zone
+EVT1005    45.523      -122.676    18.7        3.1         EQ          REVIEW        Portland Metro Area
+EVT1006    48.751      -121.813    0.5         1.4         VOLCANIC    AUTOMATED     Mount Baker
+EVT1007    42.105      -124.511    32.0        4.8         EQ          CONFIRMED     Southern Oregon Coast
+EVT1008    47.606      -122.332    21.3        2.1         EQ          CANCELLED     Seattle Fault
+EVT1009    46.852      -121.760    4.2         2.5         VOLCANIC    CONFIRMED     Mount Rainier
+EVT1010    44.058      -121.315    8.9         3.8         EQ          CONFIRMED     Central Oregon High Lava
+EVT1011    49.100      -125.800    15.2        6.1         EQ          CONFIRMED     Vancouver Island Offshore
+EVT1012    45.012      -123.901    5.0         1.2         EXPLOSION   REVIEW        Coast Range Quarry
