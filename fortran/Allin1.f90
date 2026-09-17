@@ -6,7 +6,7 @@ program main_menu
         print*, "1. Celcius to Farenhite"
         print*, "2. Magnitude of Vector Resultant"
         print*, "3. Area Calculator for Different Geometrical shapes"
-        print*, "4. prog4"
+        print*, "4. Concatenate two or three words or sentences & split one sentence into two or three parts."
         print*, "============================================"
         read*, choice
 
@@ -17,6 +17,8 @@ program main_menu
                 call Q2()
 	case (3)
 		call area_calculator()
+	case (4)
+		call con_split()
         case default
                 print*, "Invalid Choice"
         end select
@@ -98,5 +100,30 @@ subroutine area_calculator()
     end select
 
 end subroutine area_calculator
+
+subroutine con_split()
+implicit none
+        character(len=8)   :: word1, word2
+        character(len=50)  :: sentence
+        character(len= 16) :: con
+
+        print*, "=====To Concatenate the words===="
+        print*, "Enter two words: "
+        read*, word1, word2
+
+        con= trim(word1) // trim(word2)
+        print*, "Concatenated word is: ", con
+
+        print*
+        print*, "=====Split one sentence into to two part====="
+        print*, "=====sentence length should be 50(max.)====="
+        print*
+        print*, "Enter a Sentence): "
+        read(*, '(A)') sentence
+
+        print*, "1st Split Sentence is: ", sentence(1:25)
+        print*, "2nd Split Sentence is: ", sentence(26:50)
+stop
+end subroutine con_split
 
 end program main_menu
