@@ -7,7 +7,8 @@ program main_menu
         print*, "2. Magnitude of Vector Resultant"
         print*, "3. Area Calculator for Different Geometrical shapes"
         print*, "4. Concatenate two or three words or sentences & split one sentence into two or three parts."
-        print*, "============================================"
+        print*, "5. WAP to prepare Histogram graph of the marks, keeping 5 marks as interval." 
+	print*, "============================================"
         read*, choice
 
         select case (choice)
@@ -19,6 +20,8 @@ program main_menu
 		call area_calculator()
 	case (4)
 		call con_split()
+	case (5)
+		call histogram()
         case default
                 print*, "Invalid Choice"
         end select
@@ -126,4 +129,40 @@ implicit none
 stop
 end subroutine con_split
 
+!Prepare a frequency histogram of marks as the interval.
+subroutine histogram()
+	implicit none
+	integer:: roll_no(10), marks(10,3)
+	integer:: freq(20)
+	integer:: i,j, bin_idx, total_marks
+	character(len=100):: store
+	i=0
+	freq=0
+	bin_idx= 0
+	open(50, file='student.txt', status= 'old', action= 'read')
+	
+	read(50,'(A)') store
+	do i=1,10
+		read(50,*) roll_no(i),marks(i,1),marks(i,2),marks(i,3)
+	end do
+	close(50)
+
+	do i=1,10
+		do j=1,3
+			total_marks=marks(i,j) 
+			! Calculate bin index (0-4 -> 1, 5-9 -> 2, ..., 95-100 -> 20)
+			bin_idx= (total_marks/5)+1
+			freq(bin_idx)= freq(bin_idx)+1
+		end do
+	end do 
+
+print*,"Interval | Frequency | Histogram"
+print*,"--------------------------------"
+do i=1,20
+	if(freq(i)>0) then
+		print "(i2, '-', i2, 2x,'|', 2x, i2,2x, '|', 2x, A)", (i-1)*5, (i*5)-1, freq(i), repeat('*', freq(i))
+	end if
+end do
+
+end subroutine histogram
 end program main_menu
