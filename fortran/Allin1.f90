@@ -7,7 +7,8 @@ program main_menu
         print*, "2. Magnitude of Vector Resultant"
         print*, "3. Area Calculator for Different Geometrical shapes"
         print*, "4. Concatenate two or three words or sentences & split one sentence into two or three parts."
-        print*, "5. WAP to prepare Histogram graph of the marks, keeping 5 marks as interval." 
+        print*, "5. WAP to prepare Histogram graph of the marks, keeping 5 marks as interval."
+	print*, "6. WAP to extracts integer, real, characters from a sentence." 
 	print*, "============================================"
         read*, choice
 
@@ -22,6 +23,8 @@ program main_menu
 		call con_split()
 	case (5)
 		call histogram()
+	case (6)
+		call identity()
         case default
                 print*, "Invalid Choice"
         end select
@@ -163,6 +166,37 @@ do i=1,20
 		print "(i2, '-', i2, 2x,'|', 2x, i2,2x, '|', 2x, A)", (i-1)*5, (i*5)-1, freq(i), repeat('*', freq(i))
 	end if
 end do
-
 end subroutine histogram
+
+subroutine identity()
+	implicit none
+	character(len=200):: sen
+	character(len=50) :: w
+	integer		  :: n, si, sr, p
+	real		  :: r
+
+	write(*,*) "Type a Sentence: "
+	read(*,'(A)') sen
+
+	do while(len_trim(sen) > 0)
+		sen= adjustL(sen)
+		p  = index(sen, ' ')
+		
+			if(p==0) p= len_trim(sen)+1
+				w= sen(1:p-1)
+				sen = sen(p:)
+
+			read(w, *, iostat = si) n
+			read(w, *, iostat = sr) r
+			if(si==0 .and. index(w, '.')==0) then
+				print'(A,i0)', "integer: ",n
+				else if(sr==0) then
+					print*,"real number: ",r
+			else
+				print*, "Word: ",w
+
+			end if
+	end do
+end subroutine identity
+
 end program main_menu
