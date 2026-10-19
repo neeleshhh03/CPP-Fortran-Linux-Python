@@ -9,6 +9,7 @@ program main_menu
         print*, "4. Concatenate two or three words or sentences & split one sentence into two or three parts."
         print*, "5. WAP to prepare Histogram graph of the marks, keeping 5 marks as interval."
 	print*, "6. WAP to extracts integer, real, characters from a sentence." 
+	print*, "7. [NEW-TXREGION]WAP to take i/p from a file a write it on a o/p file"
 	print*, "============================================"
         read*, choice
 
@@ -25,6 +26,8 @@ program main_menu
 		call histogram()
 	case (6)
 		call identity()
+	case (7)
+		call temp()
         case default
                 print*, "Invalid Choice"
         end select
@@ -198,5 +201,35 @@ subroutine identity()
 			end if
 	end do
 end subroutine identity
+
+subroutine temp()
+	implicit none
+	integer,parameter:: nsets=8 
+	integer          :: is, iy, m,i,iyear,nyear
+	real             :: rf(8,107,12)
+	character(len=1) :: code
+	character(len=83):: details
+	character(len=5) :: index
+
+	i     = 1 ! initialization
+
+	open(11, file= 'NEW-TXREGION.txt', form='formatted', access='sequential', status='old')
+	open(12, file= 'temp_output.txt', form='formatted', access='sequential', status='unknown')
+
+	do is=i, nsets
+	read(11, 1) nyear, details
+1	format(i3,a)
+	write(12,1) nyear, details
+
+		do iy=1, 107
+		read(11,2) index,iyear,code,(rf(is,iy,m),m=1,12)
+2		format(a5, i4, a1, 12f6.1)
+		write(12,2) index,iyear,code,(rf(is,iy,m),m=1,12)  
+		end do
+	end do
+	close(11)
+	close(12)
+	stop
+end subroutine temp
 
 end program main_menu
