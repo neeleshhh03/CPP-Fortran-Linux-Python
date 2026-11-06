@@ -1,7 +1,7 @@
 !Pragram Menu to choose which particular program you wanna compile and run.
 program main_menu
         integer :: choice
-        print*, "============================================"
+        print*, "--------------------------------------------------------------------------------------------------"
         print*, "Select a program to run(1,2,3,4,...so on)"
         print*, "1. Celcius to Farenhite"
         print*, "2. Magnitude of Vector Resultant"
@@ -10,7 +10,8 @@ program main_menu
         print*, "5. WAP to prepare Histogram graph of the marks, keeping 5 marks as interval."
 	print*, "6. WAP to extracts integer, real, characters from a sentence." 
 	print*, "7. [NEW-TXREGION]WAP to take i/p from a file a write it on a o/p file"
-	print*, "============================================"
+	print*, "8. [SUBROUTINE]WAP to find roots of a Quadratic equation"
+	print*, "---------------------------------------------------------------------------------------------------"
         read*, choice
 
         select case (choice)
@@ -28,6 +29,10 @@ program main_menu
 		call identity()
 	case (7)
 		call temp()
+	case (8)
+		print*, 'Enter coefficients of a, b, c (ax^2 + bx + c = 0): '
+		read*, a, b, c
+		call roots(a, b, c, x_real1, x_real2, x_imag1, x_imag2, i)
         case default
                 print*, "Invalid Choice"
         end select
@@ -231,5 +236,48 @@ subroutine temp()
 	close(12)
 	stop
 end subroutine temp
+
+!================ Computing roots of a Quadratic Equation============
+subroutine roots(a,b,c, x_real1, x_real2, x_imag1, x_imag2, i) 
+    implicit none 
+    real, intent(in)    :: a,b,c 
+    real, intent(out)   :: x_real1, x_real2, x_imag1, x_imag2 
+    integer, intent(out):: i 
+    real 		:: discr, d 
+    
+    ! ================to compute roots of a Quadratic Equation============ 
+    
+    discr = b*b - 4.0*a*c 
+    
+    if (discr > 0.0) then 
+        i = 2 ! Two distinct real roots
+        d = SQRT(discr) 
+        x_real1 = 0.5*(-b + d)/a 
+        x_real2 = 0.5*(-b - d)/a 
+        x_imag1 = 0.0
+        x_imag2 = 0.0
+        print*, "Root 1: ", x_real1
+        print*, "Root 2: ", x_real2
+    else if (discr == 0.0) then
+        i = 1 ! One repeated real root
+        x_real1 = -b / (2.0*a)     !OR x_real2 = -b / (2.0*a) 
+        x_real2 = x_real1
+        x_imag1 = 0.0
+        x_imag2 = 0.0
+        print*, 'Both are same'
+        print*, "Root 1: ", x_real1
+        print*, "Root 2: ", x_real2
+    else 
+        i = 0 ! Complex roots
+        d = SQRT(-discr)
+        x_real1 = -b / (2.0*a)
+        x_real2 = x_real1
+        x_imag1 = 0.5*d/a
+        x_imag2 = -0.5*d/a
+        print*, "Root 1: ", x_real1, " + ", x_imag1, "i"
+        print*, "Root 2: ", x_real2, " - ", ABS(x_imag2), "i"
+     end if   
+     stop
+end subroutine roots
 
 end program main_menu
